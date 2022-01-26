@@ -11,7 +11,7 @@ public class Processor {
 		return this.model;
 	}
 
-	public void claculateNextMove() {
+	public void calculateNextMove() {
 		// TODO - implement Processor.claculateNextMove
 		throw new UnsupportedOperationException();
 	}
