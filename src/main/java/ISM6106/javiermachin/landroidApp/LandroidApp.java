@@ -21,5 +21,8 @@ public class LandroidApp {
 		System.out.println("Your landroid nicknamed: " + bigLandroid.getNickName() + " is a "
 				+ bigLandroid.getLandroidType() + " model");
 	}
+	
+	
+	/*Test methods to move to */
 
 }
