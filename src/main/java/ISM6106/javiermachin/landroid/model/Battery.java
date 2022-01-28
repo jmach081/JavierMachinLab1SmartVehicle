@@ -48,6 +48,7 @@ public class Battery implements SelfCheckCapable {
 
 	/**
 	 * Returns the current status of battery
+	 * 
 	 * @return
 	 */
 	public double getChargeStatus() {
@@ -66,6 +67,8 @@ public class Battery implements SelfCheckCapable {
 	public boolean selfCheck() {
 		if (this.chargeStatus * 100 / this.capacity > 25)
 			return true;
+
+		System.out.println("Battery check... No needs to charge");
 		return false;
 	}
 

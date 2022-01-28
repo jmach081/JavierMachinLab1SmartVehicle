@@ -5,10 +5,10 @@ package ISM6106.javiermachin.landroid.model;
  */
 public class KeyPad {
 
-	private int command;
+	private String command;
 	private String[] keys;
 
-	public void setCommand(int command) {
+	public void setCommand(String command) {
 		this.command = command;
 	}
 

@@ -16,10 +16,15 @@ public class LandroidApp {
 	 */
 	public static void main(String[] args) {
 		
-		Landroid bigLandroid = new Landroid("BigBot",LandroidType.HalfAcre);
-		bigLandroid.setNickName("GreenEater");
-		System.out.println("Your landroid nicknamed: " + bigLandroid.getNickName() + " is a "
-				+ bigLandroid.getLandroidType() + " model");
+		Landroid aBigLandroid = LandroidFactory.getALandroid(LandroidType.HalfAcre);
+		aBigLandroid.setNickName("R2D2");
+		System.out.println("Your landroid nicknamed: " + aBigLandroid.getNickName() + " is a "
+				+ aBigLandroid.getLandroidType() + " model");
+		
+		aBigLandroid.systemCheck();
+		
+//		System.out.println(aBigLandroid.getClass().toString());
+		
 	}
 	
 	

@@ -117,21 +117,38 @@ public class Landroid {
 		System.out.println("goToChargeStation");
 	}
 
+	/**
+	 * Performs a system check to make sure the system is fully functional
+	 */
 	public void systemCheck() {
-		int errorCount = 0;
 		
-		Set<Entry<Integer, SelfCheckCapable>> set = sensorArray.entrySet();
-		Iterator<Entry<Integer, SelfCheckCapable>> i = set.iterator();
-		while (i.hasNext()) {
-			Entry<Integer, SelfCheckCapable> me = i.next();
-			if ( !me.getValue().selfCheck() ) errorCount++;
+		System.out.println("Landroid System check....");
+		
+		int errorCount = 0;
+
+		if (this.sensorArray == null) {
+			errorCount++;
+			System.out.println("Landroid System check. Critial failure. No sensors detected");
+		}
+		else {
+			Set<Entry<Integer, SelfCheckCapable>> set = sensorArray.entrySet();
+			Iterator<Entry<Integer, SelfCheckCapable>> i = set.iterator();
+			while (i.hasNext()) {
+				Entry<Integer, SelfCheckCapable> me = i.next();
+				if (!me.getValue().selfCheck())
+					errorCount++;
+			}
+		}
+
+		// Check battery that is not a self check component
+		if (this.battery == null) {
+			errorCount++;
+			System.out.println("Landroid System check. No battery detected");
 		}
 		
-		// Check battery that is not a self check component
-		if (this.battery == null) errorCount++;
-		if (this.battery.selfCheck()) errorCount++;
-		
-//		TODO - if errorCount > 0 send error message to display if no error send message everything ok 
-		
+		if (!this.battery.selfCheck())
+			errorCount++;
+
+		System.out.println("Landroid System check Found ( " + errorCount + " ) errors.");
 	}
 }

@@ -4,9 +4,11 @@ public class RotarySelector {
 
 	private int position;
 
-	public void setPosition() {
-		// TODO - implement RotarySelector.setPosition
-		throw new UnsupportedOperationException();
+	public RotarySelector() {
+		this.position = 1;
 	}
-
+	
+	public void setPosition(int position) {
+		this.position = position;
+	}
 }

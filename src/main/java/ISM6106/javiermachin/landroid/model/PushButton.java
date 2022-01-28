@@ -8,9 +8,24 @@ public class PushButton {
 	private boolean status;
 	private String color;
 
+	public PushButton() {
+		this.status = false;
+		this.color = "Red";
+	}
+	
+	/**
+	 * Press the pushbutton switch the boolean status
+	 */
 	public void pressButton() {
-		// TODO - implement PushButton.pressButton
-		throw new UnsupportedOperationException();
+		this.status = !this.isStatus();
 	}
 
+	/**
+	 * Gets the status of the button
+	 * @return
+	 */
+	public boolean isStatus() {
+		return status;
+	}
+	
 }

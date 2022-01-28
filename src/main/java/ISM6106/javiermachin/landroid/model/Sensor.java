@@ -1,6 +1,8 @@
 package ISM6106.javiermachin.landroid.model;
 
-public abstract class Sensor {
+import edu.fiu.jit.SelfCheckCapable;
+
+public abstract class Sensor implements SelfCheckCapable {
 
 	private String sensorType;
 	protected double maxAngleOfView;
