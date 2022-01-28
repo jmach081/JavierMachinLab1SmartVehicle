@@ -13,4 +13,15 @@ public class WaterSensor extends Sensor {
 		// TODO Auto-generated method stub
 		throw new UnsupportedOperationException();
 	}
+
+	@Override
+	public String getComponentName() {
+		return "WaterSensor";
+	}
+
+	@Override
+	public boolean selfCheck() {
+		System.out.println("WaterSensor check... OK");
+		return true;
+	}
 }
