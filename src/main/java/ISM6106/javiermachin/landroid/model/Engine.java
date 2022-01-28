@@ -20,18 +20,15 @@ public class Engine {
 	}
 
 	public void SpinClockWise() {
-		// TODO - implement Engine.SpinClockWise
-		throw new UnsupportedOperationException();
+		System.out.println("Engine spinning Clockwise...");
 	}
 
 	public void SpinCounterClockWise() {
-		// TODO - implement Engine.SpinCounterClockWise
-		throw new UnsupportedOperationException();
+		System.out.println("Engine spinning counterClockwise...");
 	}
 
 	public void Stop() {
-		// TODO - implement Engine.Stop
-		throw new UnsupportedOperationException();
+		System.out.println("Engine Stop...");
 	}
 
 }

@@ -11,7 +11,7 @@ public class PositionSensor extends Sensor {
 	@Override
 	public void scan() {
 		// TODO Auto-generated method stub
-		throw new UnsupportedOperationException();
+		System.out.println("PositionSensor I can't see anything close.");
 	}
 
 	@Override

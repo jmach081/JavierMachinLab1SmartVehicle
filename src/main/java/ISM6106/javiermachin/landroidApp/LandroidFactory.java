@@ -17,20 +17,24 @@ public class LandroidFactory {
 
 		//Get a set of sensors for the android
 		SortedMap<Integer, SelfCheckCapable> sensors = getASensorSet();
+		SortedMap<Integer, PropulsorUnit> propulsionUnits = getAPropulsorUnitSet();
 		
 		switch (landroidType) {
 		case OneFourthAcre:
 			Landroid medLandroid = new Landroid("OneFourthAcre Landroid", LandroidType.OneFourthAcre, new Battery());
 			medLandroid.setSensorArray(sensors);
+			medLandroid.setImpulsorUnits(propulsionUnits);
 			return medLandroid;
 		case HalfAcre:
 			Landroid bigLandroid = new Landroid("HalfAcre Landroid", LandroidType.HalfAcre, new Battery());
 			bigLandroid.setSensorArray(sensors);
+			bigLandroid.setImpulsorUnits(propulsionUnits);
 			return bigLandroid;
 		case OneEightAcre:
 		default:
 			var littleLandroid = new Landroid("OneEightAcre Landroid", LandroidType.OneEightAcre, new Battery(BateryType.NiMH,500,500));
 			littleLandroid.setSensorArray(sensors);
+			littleLandroid.setImpulsorUnits(propulsionUnits);
 			return littleLandroid;
 		}
 	}
@@ -73,6 +77,23 @@ public class LandroidFactory {
 		sensors.put(5, aCameraSensor);
 		
 		return sensors;
+	}
+
+	private static PropulsorUnit getAPropulsionUnit() {
+		return  new PropulsorUnit(new Wheel(10), new Engine(1));
+	}
+	
+	private static SortedMap<Integer, PropulsorUnit> getAPropulsorUnitSet()
+	{
+		SortedMap<Integer, PropulsorUnit> propulsorUnits = new TreeMap<Integer, PropulsorUnit>();
+		
+		PropulsorUnit rightWheel = getAPropulsionUnit();
+		PropulsorUnit leftWheel = getAPropulsionUnit();
+		
+		propulsorUnits.put(1, rightWheel);
+		propulsorUnits.put(2, leftWheel);
+		
+		return propulsorUnits;
 	}
 	
 }

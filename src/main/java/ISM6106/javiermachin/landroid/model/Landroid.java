@@ -68,42 +68,54 @@ public class Landroid {
 	}
 
 	public void moveForward() {
-		// TODO - Implement Method
 		System.out.println("moveForward");
+		//check clearence from Position Sensor
+		((PositionSensor)this.sensorArray.get(2)).scan();
+
+		//Move both wheels forward
+		this.impulsorUnits.get(1).SpinClockWise();
+		this.impulsorUnits.get(2).SpinClockWise();
 	}
 
 	public void moveBackwards() {
-		// TODO - Implement Method
 		System.out.println("moveBackwards");
+		//check clearence from Position Sensor
+		((PositionSensor)this.sensorArray.get(2)).scan();
+
+		//Move both wheels forward
+		this.impulsorUnits.get(1).SpinCounterClockWise();
+		this.impulsorUnits.get(2).SpinCounterClockWise();
 	}
 
 	public void turnLeft() {
-		// TODO - Implement Method
 		System.out.println("turnLeft");
+		spinCounterClockWise(90);
 	}
 
 	public void turnRight() {
-		// TODO - Implement Method
 		System.out.println("turnRight");
+		spinClockWise(90);
 	}
 
 	public void spinClockWise(Integer angle) {
-		// TODO - Implement Method
-		System.out.println("spinClockWise");
+		System.out.println("spinClockWise " + String.valueOf(angle) + " degress");
+		this.impulsorUnits.get(1).SpinCounterClockWise();
+		this.impulsorUnits.get(2).SpinClockWise();
 	}
 
 	public void spinCounterClockWise(Integer angle) {
-		// TODO - Implement Method
-		System.out.println("spinCounterClockWise");
+		System.out.println("spinCounterClockWise " + String.valueOf(angle) + " degress");
+		this.impulsorUnits.get(1).SpinClockWise();
+		this.impulsorUnits.get(2).SpinCounterClockWise();
+		
 	}
 
 	public void turnOn() {
-		// TODO - Implement Method
 		System.out.println("turnOn");
+		systemCheck();
 	}
 
 	public void turnOff() {
-		// TODO - Implement Method
 		System.out.println("turnOff");
 	}
 
@@ -148,7 +160,22 @@ public class Landroid {
 		
 		if (!this.battery.selfCheck())
 			errorCount++;
+		
+		if (this.impulsorUnits == null) {
+			errorCount++;
+			System.out.println("Landroid System check. No impulsor unit detected");
+		}
+		
+		if(this.impulsorUnits.size() != 2){
+			errorCount++;
+			System.out.println("Landroid System check. Missing one or more impulsor units");
+		}
 
 		System.out.println("Landroid System check Found ( " + errorCount + " ) errors.");
+	}
+
+	public void stop() {
+		this.impulsorUnits.get(1).Stop();
+		this.impulsorUnits.get(2).Stop();
 	}
 }

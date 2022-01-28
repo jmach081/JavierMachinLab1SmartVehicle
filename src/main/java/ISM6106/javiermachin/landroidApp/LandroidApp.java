@@ -21,12 +21,15 @@ public class LandroidApp {
 		System.out.println("Your landroid nicknamed: " + aBigLandroid.getNickName() + " is a "
 				+ aBigLandroid.getLandroidType() + " model");
 		
-		aBigLandroid.systemCheck();
+		aBigLandroid.turnOn();
 		
-//		System.out.println(aBigLandroid.getClass().toString());
-		
+		System.out.println(aBigLandroid.getNickName() + " ready to rumble ");
+		aBigLandroid.moveForward();
+		aBigLandroid.turnLeft();
+		aBigLandroid.moveForward();
+		aBigLandroid.turnRight();
+		aBigLandroid.stop();
 	}
-	
 	
 	/*Test methods to move to */
 
