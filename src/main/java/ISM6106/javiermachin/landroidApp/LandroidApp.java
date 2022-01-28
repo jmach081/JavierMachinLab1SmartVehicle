@@ -16,7 +16,7 @@ public class LandroidApp {
 	 */
 	public static void main(String[] args) {
 		
-		Landroid bigLandroid = new Landroid(LandroidSize.HalfAcre);
+		Landroid bigLandroid = new Landroid("BigBot",LandroidType.HalfAcre);
 		bigLandroid.setNickName("GreenEater");
 		System.out.println("Your landroid nicknamed: " + bigLandroid.getNickName() + " is a "
 				+ bigLandroid.getLandroidType() + " model");
