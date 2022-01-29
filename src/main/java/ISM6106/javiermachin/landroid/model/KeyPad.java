@@ -17,7 +17,7 @@ public class KeyPad {
 		throw new UnsupportedOperationException();
 	}
 
-	public void pressKeys() {
+	public void pressKeys(String[] keys) {
 		// TODO - implement KeyPad.pressKeys
 		throw new UnsupportedOperationException();
 	}

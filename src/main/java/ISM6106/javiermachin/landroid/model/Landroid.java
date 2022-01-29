@@ -1,5 +1,7 @@
 package ISM6106.javiermachin.landroid.model;
 
+import static org.junit.jupiter.api.Assertions.assertAll;
+
 import java.util.Iterator;
 import java.util.Map;
 import java.util.Map.Entry;
@@ -69,20 +71,20 @@ public class Landroid {
 
 	public void moveForward() {
 		System.out.println("moveForward");
-		//check clearence from Position Sensor
-		((PositionSensor)this.sensorArray.get(2)).scan();
+		// check clearence from Position Sensor
+		((PositionSensor) this.sensorArray.get(2)).scan();
 
-		//Move both wheels forward
+		// Move both wheels forward
 		this.impulsorUnits.get(1).SpinClockWise();
 		this.impulsorUnits.get(2).SpinClockWise();
 	}
 
 	public void moveBackwards() {
 		System.out.println("moveBackwards");
-		//check clearence from Position Sensor
-		((PositionSensor)this.sensorArray.get(2)).scan();
+		// check clearence from Position Sensor
+		((PositionSensor) this.sensorArray.get(2)).scan();
 
-		//Move both wheels forward
+		// Move both wheels forward
 		this.impulsorUnits.get(1).SpinCounterClockWise();
 		this.impulsorUnits.get(2).SpinCounterClockWise();
 	}
@@ -98,25 +100,27 @@ public class Landroid {
 	}
 
 	public void spinClockWise(Integer angle) {
-		System.out.println("spinClockWise " + String.valueOf(angle) + " degress");
+		System.out.println("spinClockWise " + String.valueOf(angle) + " degrees");
 		this.impulsorUnits.get(1).SpinCounterClockWise();
 		this.impulsorUnits.get(2).SpinClockWise();
 	}
 
 	public void spinCounterClockWise(Integer angle) {
-		System.out.println("spinCounterClockWise " + String.valueOf(angle) + " degress");
+		System.out.println("spinCounterClockWise " + String.valueOf(angle) + " degrees");
 		this.impulsorUnits.get(1).SpinClockWise();
 		this.impulsorUnits.get(2).SpinCounterClockWise();
-		
+
 	}
 
 	public void turnOn() {
 		System.out.println("turnOn");
+		((ControlPanel) this.sensorArray.get(1)).getPushButton().pressButton();
 		systemCheck();
 	}
 
 	public void turnOff() {
 		System.out.println("turnOff");
+		((ControlPanel) this.sensorArray.get(1)).getPushButton().pressButton();
 	}
 
 	public void findClosestWire() {
@@ -133,16 +137,15 @@ public class Landroid {
 	 * Performs a system check to make sure the system is fully functional
 	 */
 	public void systemCheck() {
-		
+
 		System.out.println("Landroid System check....");
-		
+
 		int errorCount = 0;
 
 		if (this.sensorArray == null) {
 			errorCount++;
 			System.out.println("Landroid System check. Critial failure. No sensors detected");
-		}
-		else {
+		} else {
 			Set<Entry<Integer, SelfCheckCapable>> set = sensorArray.entrySet();
 			Iterator<Entry<Integer, SelfCheckCapable>> i = set.iterator();
 			while (i.hasNext()) {
@@ -157,25 +160,32 @@ public class Landroid {
 			errorCount++;
 			System.out.println("Landroid System check. No battery detected");
 		}
-		
+
 		if (!this.battery.selfCheck())
 			errorCount++;
-		
+
 		if (this.impulsorUnits == null) {
 			errorCount++;
 			System.out.println("Landroid System check. No impulsor unit detected");
 		}
-		
-		if(this.impulsorUnits.size() != 2){
+
+		if (this.impulsorUnits.size() != 2) {
 			errorCount++;
 			System.out.println("Landroid System check. Missing one or more impulsor units");
 		}
 
 		System.out.println("Landroid System check Found ( " + errorCount + " ) errors.");
+
+		if (errorCount > 0)
+			((ControlPanel) this.sensorArray.get(1)).getDisplay().displayErrorMessage("Unable to start. Review Errors");
 	}
 
 	public void stop() {
 		this.impulsorUnits.get(1).Stop();
 		this.impulsorUnits.get(2).Stop();
+	}
+	
+	public void inputCommand(String[] command) {
+		((ControlPanel) this.sensorArray.get(1)).getKeyPad().pressKeys(command);
 	}
 }

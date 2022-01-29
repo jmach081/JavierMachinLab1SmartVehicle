@@ -27,22 +27,22 @@ public class ControlPanel implements SelfCheckCapable {
 
 		int errorCount = 0;
 
-		if (this.keyPad == null) {
+		if (this.getKeyPad() == null) {
 			errorCount++;
 			System.out.println("ControlPanel: missing keypad");
 		}
 		
-		if (this.display == null) {
+		if (this.getDisplay() == null) {
 			errorCount++;
 			System.out.println("ControlPanel: missing display");
 		}
 		
-		if (this.rotarySelector == null) {
+		if (this.getRotarySelector() == null) {
 			errorCount++;
 			System.out.println("ControlPanel: missing rotarySelector");
 		}
 		
-		if (this.pushButton == null) {
+		if (this.getPushButton() == null) {
 			errorCount++;
 			System.out.println("ControlPanel: missing pushButton");
 		}
@@ -51,6 +51,26 @@ public class ControlPanel implements SelfCheckCapable {
 
 		// If no errors system check true otherwise false
 		return (errorCount == 0);
+	}
+
+	public KeyPad getKeyPad() {
+		return keyPad;
+	}
+
+	public Display getDisplay() {
+		return display;
+	}
+
+	public RotarySelector getRotarySelector() {
+		return rotarySelector;
+	}
+
+	public PushButton getPushButton() {
+		return pushButton;
+	}
+	
+	public void pressKeys(String[] keys) {
+		this.getKeyPad().pressKeys(keys);
 	}
 
 }
