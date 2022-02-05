@@ -68,7 +68,7 @@ public class Battery implements SelfCheckCapable {
 		if (this.chargeStatus * 100 / this.capacity > 25)
 			return true;
 
-		System.out.println("Battery check... No needs to charge");
+		System.out.println("Battery check... Needs to charge");
 		return false;
 	}
 

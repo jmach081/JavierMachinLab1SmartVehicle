@@ -2,13 +2,18 @@ package ISM6106.javiermachin.landroid.model;
 
 import static org.junit.jupiter.api.Assertions.assertAll;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
 import java.util.SortedMap;
 
+import edu.fiu.jit.GenericComponent;
 import edu.fiu.jit.SelfCheckCapable;
+import edu.fiu.jit.SelfCheckUtils;
 
 /**
  * Class to represent a Landroid
@@ -16,7 +21,7 @@ import edu.fiu.jit.SelfCheckCapable;
  * @author xmachin
  *
  */
-public class Landroid {
+public class Landroid implements GenericComponent {
 
 	private String name;
 	private String nickName; // Nick name set by the owner
@@ -25,14 +30,22 @@ public class Landroid {
 	private SortedMap<Integer, PropulsorUnit> impulsorUnits;
 	private SortedMap<Integer, SelfCheckCapable> sensorArray;
 
+	public Landroid(String name, LandroidType landroidType, Battery battery,
+			SortedMap<Integer, PropulsorUnit> impulsorUnits, SortedMap<Integer, SelfCheckCapable> sensorArray) {
+		this.name = name;
+		this.landroidType = landroidType;
+		this.battery = battery;
+		this.impulsorUnits = impulsorUnits;
+		this.sensorArray = sensorArray;
+	}
+
 	public Landroid(String name, LandroidType landroidType) {
 		this.name = name;
 		this.landroidType = landroidType;
 	}
 
 	public Landroid(String name, LandroidType landroidType, Battery battery) {
-		this.name = name;
-		this.landroidType = landroidType;
+		this(name, landroidType);
 		this.battery = battery;
 	}
 
@@ -134,9 +147,10 @@ public class Landroid {
 	}
 
 	/**
-	 * Performs a system check to make sure the system is fully functional
+	 * Performs a system check to make sure the system is fully functional Will
+	 * Check for all the parts to be ready
 	 */
-	public void systemCheck() {
+	public boolean systemCheck() {
 
 		System.out.println("Landroid System check....");
 
@@ -159,6 +173,7 @@ public class Landroid {
 		if (this.battery == null) {
 			errorCount++;
 			System.out.println("Landroid System check. No battery detected");
+
 		}
 
 		if (!this.battery.selfCheck())
@@ -176,16 +191,53 @@ public class Landroid {
 
 		System.out.println("Landroid System check Found ( " + errorCount + " ) errors.");
 
-		if (errorCount > 0)
+		if (errorCount > 0) {
 			((ControlPanel) this.sensorArray.get(1)).getDisplay().displayErrorMessage("Unable to start. Review Errors");
+			return false;
+		}
+
+		return true;
 	}
 
 	public void stop() {
 		this.impulsorUnits.get(1).Stop();
 		this.impulsorUnits.get(2).Stop();
 	}
-	
+
 	public void inputCommand(String[] command) {
 		((ControlPanel) this.sensorArray.get(1)).getKeyPad().pressKeys(command);
+	}
+
+	@Override
+	public String getComponentName() {
+		return "Landroid " + this.landroidType;
+	}
+
+	/***
+	 * Returns True based on own internal checks multiplied by 10% of failure
+	 */
+	@Override
+	public boolean selfCheck() {
+		return SelfCheckUtils.randomCheck(0.1) && this.systemCheck();
+	}
+
+	/***
+	 * Gets a list of internal components that are self capable
+	 */
+	@Override
+	public List<SelfCheckCapable> getSubComponents() {
+
+		List<SelfCheckCapable> internalComponents = new ArrayList<SelfCheckCapable>();
+
+		Set<Entry<Integer, SelfCheckCapable>> set = sensorArray.entrySet();
+		Iterator<Entry<Integer, SelfCheckCapable>> i = set.iterator();
+		while (i.hasNext()) {
+			Entry<Integer, SelfCheckCapable> me = i.next();
+			internalComponents.add(me.getValue());
+		}
+
+		internalComponents.add(this.battery); // This one stand alone element that is no part of the sensors
+
+		return internalComponents;
 	}
 }

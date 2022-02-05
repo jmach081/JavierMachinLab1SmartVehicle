@@ -22,13 +22,16 @@ public class LandroidApp {
 				+ aBigLandroid.getLandroidType() + " model");
 		
 		aBigLandroid.turnOn();
+
+//		aBigLandroid.selfCheck();
+		
 		
 		System.out.println(aBigLandroid.getNickName() + " ready to rumble ");
-		aBigLandroid.moveForward();
-		aBigLandroid.turnLeft();
-		aBigLandroid.moveForward();
-		aBigLandroid.turnRight();
-		aBigLandroid.stop();
+//		aBigLandroid.moveForward();
+//		aBigLandroid.turnLeft();
+//		aBigLandroid.moveForward();
+//		aBigLandroid.turnRight();
+//		aBigLandroid.stop();
 	}
 	
 	/*Test methods to move to */
