@@ -12,6 +12,11 @@ import edu.fiu.jit.SelfCheckCapable;
 
 public class LandroidFactory {
 
+	/**
+	 * Gets a pre-build landroid base on the type that you want
+	 * @param landroidType
+	 * @return
+	 */
 	public static Landroid getALandroid(LandroidType landroidType)
 	{
 
@@ -43,7 +48,7 @@ public class LandroidFactory {
 	 * Get a control panel assembled
 	 * @return
 	 */
-	private static ControlPanel getControlPanel() {
+	public static ControlPanel getControlPanel() {
 		/* Building a control panel*/
 		KeyPad aKeyPad = new KeyPad();
 		Display aDisplay = new Display();
@@ -57,7 +62,7 @@ public class LandroidFactory {
 	 * Gets a set of sensor ready
 	 * @return
 	 */
-	private static SortedMap<Integer, SelfCheckCapable> getASensorSet(){
+	public static SortedMap<Integer, SelfCheckCapable> getASensorSet(){
 		SortedMap<Integer, SelfCheckCapable> sensors = new TreeMap<Integer, SelfCheckCapable>();
 		
 		//Build the sensor parts
@@ -79,11 +84,11 @@ public class LandroidFactory {
 		return sensors;
 	}
 
-	private static PropulsorUnit getAPropulsionUnit() {
+	public static PropulsorUnit getAPropulsionUnit() {
 		return  new PropulsorUnit(new Wheel(10), new Engine(1));
 	}
 	
-	private static SortedMap<Integer, PropulsorUnit> getAPropulsorUnitSet()
+	public static SortedMap<Integer, PropulsorUnit> getAPropulsorUnitSet()
 	{
 		SortedMap<Integer, PropulsorUnit> propulsorUnits = new TreeMap<Integer, PropulsorUnit>();
 		
