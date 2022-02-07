@@ -1,6 +1,9 @@
 package ISM6106.javiermachin.landroid.model;
 
-public class Engine {
+import edu.fiu.jit.SelfCheckCapable;
+import edu.fiu.jit.SelfCheckUtils;
+
+public class Engine implements SelfCheckCapable  {
 
 	/**
 	 * The motor output in kilowatts
@@ -29,6 +32,29 @@ public class Engine {
 
 	public void Stop() {
 		System.out.println("Engine Stop...");
+	}
+
+	@Override
+	public String getComponentName() {
+		return "EV-001-" + String.valueOf(this.output);
+	}
+
+	@Override
+	public boolean selfCheck() {
+		boolean checkResult = SelfCheckUtils.randomCheck(0.1);
+
+		if (checkResult)
+			System.out.println("Engine " + this.getComponentName() + " check... OK");
+		else
+			System.out.println("Engine " + this.getComponentName() + " check... Bad");
+
+		return checkResult;
+	}
+	
+	@Override
+	public String toString() 
+	{
+		return this.getComponentName();
 	}
 
 }

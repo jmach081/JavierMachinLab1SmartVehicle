@@ -1,12 +1,15 @@
 package ISM6106.javiermachin.landroid.model;
 
 import ISM6106.javiermachin.landroid.model.*;
+import edu.fiu.jit.SelfCheckCapable;
+import edu.fiu.jit.SelfCheckTester;
+import edu.fiu.jit.SelfCheckUtils;
 
 /**
  * Composition of engine and Wheels that will spin and brake asynchronously
  * based on demand
  */
-public class PropulsorUnit {
+public class PropulsorUnit implements SelfCheckCapable {
 
 	private Wheel wheel;
 	private Engine engine;
@@ -49,5 +52,27 @@ public class PropulsorUnit {
 	 */
 	public SpinningStatus getSpinningStatus() {
 		return spinningStatus;
+	}
+
+	@Override
+	public String getComponentName() {
+		return "Propulsor E" + this.engine.getComponentName() + "-W" + String.valueOf(this.wheel.getSize());
+	}
+
+	@Override
+	public boolean selfCheck() {
+		boolean checkResult = SelfCheckUtils.randomCheck(0.1) && this.engine.selfCheck();
+
+		if (checkResult)
+			System.out.println("PropulsorUnit " + this.getComponentName() + " check... OK");
+		else
+			System.out.println("PropulsorUnit " + this.getComponentName() + " check... Bad");
+
+		return checkResult;
+	}
+	
+	@Override
+	public String toString() {
+		return this.getComponentName();
 	}
 }

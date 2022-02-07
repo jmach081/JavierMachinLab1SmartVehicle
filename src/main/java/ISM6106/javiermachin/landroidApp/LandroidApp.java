@@ -19,21 +19,22 @@ public class LandroidApp {
 		Landroid aBigLandroid = LandroidFactory.getALandroid(LandroidType.HalfAcre);
 		aBigLandroid.setNickName("R2D2");
 		System.out.println("Your landroid nicknamed: " + aBigLandroid.getNickName() + " is a "
-				+ aBigLandroid.getLandroidType() + " model");
+				+ aBigLandroid.getLandroidType() + " model"  + "\n");
 		
-		aBigLandroid.turnOn();
+//		aBigLandroid.turnOn();
 
-//		aBigLandroid.selfCheck();
+//		
+		System.out.println(aBigLandroid);
+		System.out.println();
+		aBigLandroid.selfCheck();
 		
 		
-		System.out.println(aBigLandroid.getNickName() + " ready to rumble ");
+//		System.out.println(aBigLandroid.getNickName() + " ready to rumble ");
 //		aBigLandroid.moveForward();
 //		aBigLandroid.turnLeft();
 //		aBigLandroid.moveForward();
 //		aBigLandroid.turnRight();
 //		aBigLandroid.stop();
 	}
-	
-	/*Test methods to move to */
 
 }

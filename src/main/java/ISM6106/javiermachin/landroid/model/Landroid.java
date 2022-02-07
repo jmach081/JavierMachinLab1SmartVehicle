@@ -30,6 +30,15 @@ public class Landroid implements GenericComponent {
 	private SortedMap<Integer, PropulsorUnit> impulsorUnits;
 	private SortedMap<Integer, SelfCheckCapable> sensorArray;
 
+	/**
+	 * Full Constructor
+	 * 
+	 * @param name
+	 * @param landroidType
+	 * @param battery
+	 * @param impulsorUnits
+	 * @param sensorArray
+	 */
 	public Landroid(String name, LandroidType landroidType, Battery battery,
 			SortedMap<Integer, PropulsorUnit> impulsorUnits, SortedMap<Integer, SelfCheckCapable> sensorArray) {
 		this.name = name;
@@ -39,14 +48,27 @@ public class Landroid implements GenericComponent {
 		this.sensorArray = sensorArray;
 	}
 
+	/**
+	 * Minimum Base constructor other parts need to be added later. It will fail to
+	 * start if no parts added later
+	 * 
+	 * @param name
+	 * @param landroidType
+	 */
 	public Landroid(String name, LandroidType landroidType) {
-		this.name = name;
-		this.landroidType = landroidType;
+		this(name, landroidType, null, null, null);
 	}
 
+	/**
+	 * Minimum Base constructor other parts need to be added later. It will fail to
+	 * start if no parts added later
+	 * 
+	 * @param name
+	 * @param landroidType
+	 * @param battery
+	 */
 	public Landroid(String name, LandroidType landroidType, Battery battery) {
-		this(name, landroidType);
-		this.battery = battery;
+		this(name, landroidType, battery, null, null);
 	}
 
 	/**
@@ -173,7 +195,6 @@ public class Landroid implements GenericComponent {
 		if (this.battery == null) {
 			errorCount++;
 			System.out.println("Landroid System check. No battery detected");
-
 		}
 
 		if (!this.battery.selfCheck())
@@ -225,9 +246,9 @@ public class Landroid implements GenericComponent {
 	 * Gets a list of internal components that are self capable
 	 */
 	@Override
-	public List<SelfCheckCapable> getSubComponents() {
+	public ArrayList<SelfCheckCapable> getSubComponents() {
 
-		List<SelfCheckCapable> internalComponents = new ArrayList<SelfCheckCapable>();
+		ArrayList<SelfCheckCapable> internalComponents = new ArrayList<SelfCheckCapable>();
 
 		Set<Entry<Integer, SelfCheckCapable>> set = sensorArray.entrySet();
 		Iterator<Entry<Integer, SelfCheckCapable>> i = set.iterator();
@@ -236,8 +257,28 @@ public class Landroid implements GenericComponent {
 			internalComponents.add(me.getValue());
 		}
 
-		internalComponents.add(this.battery); // This one stand alone element that is no part of the sensors
+		// Add all stand alone self check components
+		internalComponents.add(this.battery);
+		internalComponents.add(this.impulsorUnits.get(1));
+		internalComponents.add(this.impulsorUnits.get(2));
 
 		return internalComponents;
+	}
+
+	@Override
+	public String toString() {
+
+		ArrayList<SelfCheckCapable> mysubcomponents = this.getSubComponents();
+
+		String text = this.name + "\n";
+		text += "Internal parts [" + String.valueOf(mysubcomponents.size()) + "]" + "\n";
+
+		for (int i = 0; i < mysubcomponents.size(); i++) {
+			if (i >= 0)
+				text += "[" + String.valueOf(i + 1) + "] ";
+			text += mysubcomponents.get(i).getComponentName() + "\n";
+		}
+
+		return text;
 	}
 }

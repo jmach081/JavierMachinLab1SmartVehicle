@@ -1,5 +1,7 @@
 package ISM6106.javiermachin.landroid.model;
 
+import edu.fiu.jit.SelfCheckUtils;
+
 public class CameraSensor extends Sensor {
 
 	private int resolution;
@@ -33,8 +35,14 @@ public class CameraSensor extends Sensor {
 
 	@Override
 	public boolean selfCheck() {
-		System.out.println("CameraSensor check... OK");
-		return true;
+		boolean checkResult = SelfCheckUtils.randomCheck(0.1);
+
+		if (checkResult)
+			System.out.println("CameraSensor check... OK");
+		else
+			System.out.println("CameraSensor check... Bad");
+
+		return checkResult;
 	}
 
 }

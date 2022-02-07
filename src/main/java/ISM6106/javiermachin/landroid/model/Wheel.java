@@ -15,8 +15,7 @@ public class Wheel {
 	}
 
 	public double getSize() {
-		// TODO - Implement calculate the wheel size
-		throw new UnsupportedOperationException();
+		return 2 * this.radiusInch * 3.14; 
 	}
 
 }

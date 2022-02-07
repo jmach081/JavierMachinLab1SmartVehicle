@@ -14,91 +14,91 @@ public class LandroidFactory {
 
 	/**
 	 * Gets a pre-build landroid base on the type that you want
+	 * 
 	 * @param landroidType
 	 * @return
 	 */
-	public static Landroid getALandroid(LandroidType landroidType)
-	{
+	public static Landroid getALandroid(LandroidType landroidType) {
 
-		//Get a set of sensors for the android
+		// Get a set of sensors for the android
 		SortedMap<Integer, SelfCheckCapable> sensors = getASensorSet();
 		SortedMap<Integer, PropulsorUnit> propulsionUnits = getAPropulsorUnitSet();
-		
+
 		switch (landroidType) {
 		case OneFourthAcre:
-			Landroid medLandroid = new Landroid("OneFourthAcre Landroid", LandroidType.OneFourthAcre, new Battery());
-			medLandroid.setSensorArray(sensors);
-			medLandroid.setImpulsorUnits(propulsionUnits);
+			Landroid medLandroid = new Landroid("OneFourthAcre Landroid", LandroidType.OneFourthAcre, new Battery(),
+					propulsionUnits, sensors);
 			return medLandroid;
 		case HalfAcre:
-			Landroid bigLandroid = new Landroid("HalfAcre Landroid", LandroidType.HalfAcre, new Battery());
-			bigLandroid.setSensorArray(sensors);
-			bigLandroid.setImpulsorUnits(propulsionUnits);
+			Landroid bigLandroid = new Landroid("HalfAcre Landroid", LandroidType.HalfAcre, new Battery(),
+					propulsionUnits, sensors);
 			return bigLandroid;
 		case OneEightAcre:
 		default:
-			var littleLandroid = new Landroid("OneEightAcre Landroid", LandroidType.OneEightAcre, new Battery(BateryType.NiMH,500,500));
+			var littleLandroid = new Landroid("OneEightAcre Landroid", LandroidType.OneEightAcre,
+					new Battery(BateryType.NiMH, 500, 500));
 			littleLandroid.setSensorArray(sensors);
 			littleLandroid.setImpulsorUnits(propulsionUnits);
 			return littleLandroid;
 		}
 	}
-	
+
 	/**
 	 * Get a control panel assembled
+	 * 
 	 * @return
 	 */
 	public static ControlPanel getControlPanel() {
-		/* Building a control panel*/
+		/* Building a control panel */
 		KeyPad aKeyPad = new KeyPad();
 		Display aDisplay = new Display();
 		RotarySelector aRotarySelector = new RotarySelector();
 		PushButton aPushButton = new PushButton();
-		ControlPanel controlPanel = new ControlPanel(aKeyPad, aDisplay, aRotarySelector,aPushButton);
+		ControlPanel controlPanel = new ControlPanel(aKeyPad, aDisplay, aRotarySelector, aPushButton);
 		return controlPanel;
 	}
-	
+
 	/**
 	 * Gets a set of sensor ready
+	 * 
 	 * @return
 	 */
-	public static SortedMap<Integer, SelfCheckCapable> getASensorSet(){
+	public static SortedMap<Integer, SelfCheckCapable> getASensorSet() {
 		SortedMap<Integer, SelfCheckCapable> sensors = new TreeMap<Integer, SelfCheckCapable>();
-		
-		//Build the sensor parts
+
+		// Build the sensor parts
 		ControlPanel aControlPanel = getControlPanel();
-		sensors.put(1, aControlPanel); //Assign fixed spots to each component
+		sensors.put(1, aControlPanel); // Assign fixed spots to each component
 
 		PositionSensor aPositionSensor = new PositionSensor();
-		sensors.put(2, aPositionSensor); //Assign fixed spots to each component
-		
+		sensors.put(2, aPositionSensor); // Assign fixed spots to each component
+
 		WaterSensor aWaterSensor = new WaterSensor();
-		sensors.put(3, aWaterSensor); //Assign fixed spots to each component
-		
+		sensors.put(3, aWaterSensor); // Assign fixed spots to each component
+
 		WireSensor aWireSensor = new WireSensor();
-		sensors.put(4, aWireSensor); //Assign fixed spots to each component
-		
+		sensors.put(4, aWireSensor); // Assign fixed spots to each component
+
 		CameraSensor aCameraSensor = new CameraSensor();
 		sensors.put(5, aCameraSensor);
-		
+
 		return sensors;
 	}
 
 	public static PropulsorUnit getAPropulsionUnit() {
-		return  new PropulsorUnit(new Wheel(10), new Engine(1));
+		return new PropulsorUnit(new Wheel(10), new Engine(1));
 	}
-	
-	public static SortedMap<Integer, PropulsorUnit> getAPropulsorUnitSet()
-	{
+
+	public static SortedMap<Integer, PropulsorUnit> getAPropulsorUnitSet() {
 		SortedMap<Integer, PropulsorUnit> propulsorUnits = new TreeMap<Integer, PropulsorUnit>();
-		
+
 		PropulsorUnit rightWheel = getAPropulsionUnit();
 		PropulsorUnit leftWheel = getAPropulsionUnit();
-		
+
 		propulsorUnits.put(1, rightWheel);
 		propulsorUnits.put(2, leftWheel);
-		
+
 		return propulsorUnits;
 	}
-	
+
 }
