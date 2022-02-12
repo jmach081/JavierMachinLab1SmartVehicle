@@ -23,7 +23,6 @@ public class LandroidApp {
 		
 //		aBigLandroid.turnOn();
 
-//		
 		System.out.println(aBigLandroid);
 		System.out.println();
 		aBigLandroid.selfCheck();
