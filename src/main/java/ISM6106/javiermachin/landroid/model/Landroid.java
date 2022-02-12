@@ -210,6 +210,11 @@ public class Landroid implements GenericComponent {
 			System.out.println("Landroid System check. Missing one or more impulsor units");
 		}
 
+		for (PropulsorUnit propulsor : this.impulsorUnits.values()) {
+			if (!propulsor.selfCheck())
+				errorCount++;
+		}
+
 		System.out.println("Landroid System check Found ( " + errorCount + " ) errors.");
 
 		if (errorCount > 0) {
@@ -239,7 +244,12 @@ public class Landroid implements GenericComponent {
 	 */
 	@Override
 	public boolean selfCheck() {
-		return SelfCheckUtils.randomCheck(0.1) && this.systemCheck();
+
+		if (SelfCheckUtils.randomCheck(0.1) && this.systemCheck())
+			return true;
+
+		System.out.print("Major Random failure Ocurred!!!!");
+		return false;
 	}
 
 	/***

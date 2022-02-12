@@ -29,7 +29,7 @@ public class Display {
 	 */
 	public void displayMessage(String message) {
 		// TODO - implement Display.displayMessage
-		throw new UnsupportedOperationException();
+		System.out.println("From Display -> Message : " + message);
 	}
 
 	/**
@@ -37,11 +37,11 @@ public class Display {
 	 */
 	public void displayErrorMessage(String message) {
 		// TODO - implement Display.displayErrorMessage
-		throw new UnsupportedOperationException();
+		System.out.println("From Display -> Error Message : " + message);
 	}
 
 	public void displayWarningMessage(String message) {
 		// TODO - implement Display.displayWarningMessage
-		throw new UnsupportedOperationException();
+		System.out.println("From Display -> Warning Message : " + message);
 	}
 }
