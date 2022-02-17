@@ -29,6 +29,8 @@ public class Landroid implements GenericComponent {
 	private Battery battery;
 	private SortedMap<Integer, PropulsorUnit> impulsorUnits;
 	private SortedMap<Integer, SelfCheckCapable> sensorArray;
+	private Processor processor;
+	private WifiModule wifiModule;
 
 	/**
 	 * Full Constructor
@@ -46,6 +48,8 @@ public class Landroid implements GenericComponent {
 		this.battery = battery;
 		this.impulsorUnits = impulsorUnits;
 		this.sensorArray = sensorArray;
+		this.processor = new Processor();
+		this.wifiModule = new WifiModule();
 	}
 
 	/**
@@ -290,5 +294,13 @@ public class Landroid implements GenericComponent {
 		}
 
 		return text;
+	}
+
+	public Processor getProcessor() {
+		return processor;
+	}
+
+	public WifiModule getWifiModule() {
+		return wifiModule;
 	}
 }

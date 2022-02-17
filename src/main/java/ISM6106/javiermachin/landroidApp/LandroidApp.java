@@ -15,7 +15,7 @@ public class LandroidApp {
 	 * @param args
 	 */
 	public static void main(String[] args) {
-		
+	
 		Landroid aBigLandroid = LandroidFactory.getALandroid(LandroidType.HalfAcre);
 		aBigLandroid.setNickName("R2D2");
 		System.out.println("Your landroid nicknamed: " + aBigLandroid.getNickName() + " is a "
@@ -24,7 +24,6 @@ public class LandroidApp {
 //		aBigLandroid.turnOn();
 
 		System.out.println(aBigLandroid);
-		System.out.println();
 		aBigLandroid.selfCheck();
 		
 		
@@ -35,5 +34,4 @@ public class LandroidApp {
 //		aBigLandroid.turnRight();
 //		aBigLandroid.stop();
 	}
-
 }

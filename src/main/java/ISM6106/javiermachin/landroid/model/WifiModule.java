@@ -8,12 +8,12 @@ public class WifiModule {
 	private int model;
 	private int macAddress;
 
-	public void receiveCommand() {
+	public void receiveCommand(String command) {
 		// TODO - implement WifiModule.receiveCommand
 		throw new UnsupportedOperationException();
 	}
 
-	public void transmitCommand() {
+	public void transmitCommand(String command) {
 		// TODO - implement WifiModule.transmitCommand
 		throw new UnsupportedOperationException();
 	}
